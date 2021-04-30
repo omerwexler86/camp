@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/camp",
+            "lambdaFunction": "campv2function",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/camp"
+        }
+    ],
+    "resourceName": "campv2api",
+    "apiName": "campv2api",
+    "functionArns": [
+        {
+            "lambdaFunction": "campv2function"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-campv2-dev-153625-authRole",
+        "unAuthRoleName": "amplify-campv2-dev-153625-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "campv2function",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

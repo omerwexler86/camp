@@ -1,0 +1,7 @@
+{
+    "tableName": "campv2db",
+    "partitionKeyName": "email",
+    "partitionKeyType": "S",
+    "sortKeyName": "id",
+    "sortKeyType": "S"
+}
