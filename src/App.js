@@ -65,6 +65,8 @@ function App(props) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [childData, setChildData] = useState([]);
+  const [clicked, setClicked] = React.useState(0);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -78,6 +80,7 @@ function App(props) {
     if(value==0){
       return;
     }
+    setClicked(0);
     setCampdata(null);
     Auth.currentSession()
       .then((data) => {
@@ -93,16 +96,6 @@ function App(props) {
       })
       .catch(err => console.log(err));
   },[value])
-
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       {campdata && <Table data = {campdata} email={email}/>}
-  //       <Form email={email} data = {campdata}/>
-  //       <AmplifySignOut/>
-  //     </header>
-  //   </div>
-  // );
   return (
     <AmplifyAuthenticator>
       <AmplifySignUp
@@ -115,7 +108,7 @@ function App(props) {
       />
       <div className={classes.root} className = "App">
         <h2>Welcome!</h2>
-        <h3> Please use form to store campsite information and Table will display real-time campsite availability</h3>
+        <h3> Please use form to store campsite information<br/> Then, click on TABLE tab to check real-time campsite availability</h3>
         <div className = "Content">
         <AppBar position="static" color="default">
           <Tabs
@@ -127,7 +120,7 @@ function App(props) {
             aria-label="full width tabs example"
           >
             <Tab label="Form" {...a11yProps(0)} />
-            <Tab label="Table" {...a11yProps(1)} />
+            <Tab label={"Table"} {...a11yProps(1)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -136,12 +129,17 @@ function App(props) {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <Form email={email} passChildData = {setChildData}/>
+            {clicked > 0 ?<div className="alert">
+              <span onclick={setTimeout(()=>{setClicked(0)},2000)}></span> 
+              <strong>Success!</strong> Form has been submitted. Check Table tab.
+            </div>: <></>}
+            <Form email={email} click={clicked} passChildData = {setClicked}/>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction} >
             {/* {!campdata && <h2>Loading Data</h2>} */}
             {campdata && <Table data = {campdata} email={email}/>}
           </TabPanel>
+          <span class="badge">{clicked}</span>
         </SwipeableViews>
         <AmplifySignOut/>
         </div>

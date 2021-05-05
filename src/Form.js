@@ -21,17 +21,12 @@ export default function Form(props) {
     const [facilityList, setFacilityList] = useState([]);
     const email = props.email;
     const generateUniqueId = require('generate-unique-id');
+    let click = props.click;
 
 
     const onSubmit = data => {
         let facilityData = facility.split(",");
         let parsedDate = date;
-
-        // let parsedDate = date.split("-");
-        // parsedDate.push(parsedDate[0]);
-        // parsedDate.shift();
-        // parsedDate = parsedDate.join('-');
-        
 
         let confirmed = window.confirm(`Request detail: \n 
             Campsite Name: ${campName} \n
@@ -64,7 +59,8 @@ export default function Form(props) {
             .catch(error => {
                 // console.log("Error\n" + error.response);
             });
-        props.passChildData(sendData);
+        click +=1;
+        props.passChildData(click);
     };
 
     useEffect(() =>{
@@ -102,7 +98,7 @@ export default function Form(props) {
                                 setFacilityList(Object.values(data.SelectedPlace.Facilities));
                             })
                             .catch((error) => {
-                                // console.error('Error:', error);
+                                console.error('Error:', error);
                             });
                     }
                 }
