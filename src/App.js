@@ -66,8 +66,7 @@ function App(props) {
   const [value, setValue] = React.useState(0);
   const [childData, setChildData] = useState([]);
   const [clicked, setClicked] = React.useState(0);
-
-
+  const [message, setMessage] = React.useState("");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -77,6 +76,7 @@ function App(props) {
   };
   
   useEffect(() =>{
+    setMessage("");
     if(value==0){
       return;
     }
@@ -87,11 +87,15 @@ function App(props) {
         setEmail(data.idToken.payload.email);
         API.get('campv2api', '/camp/'+ data.idToken.payload.email)
           .then(async(campRes) => {
-            // console.log(campRes);
-            setCampdata(campRes);
+            if(campRes.size == undefined || campRes.size == 0){
+              setMessage("Empty! Please submit a form first");
+              console.log("Empty! Please submit a form first")
+            }else{
+              setCampdata(campRes);
+            }
           })
           .catch(error => {
-            // console.log(error);
+            console.log(error);
           });
       })
       .catch(err => console.log(err));
@@ -136,7 +140,7 @@ function App(props) {
             <Form email={email} click={clicked} passChildData = {setClicked}/>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction} >
-            {/* {!campdata && <h2>Loading Data</h2>} */}
+            {!campdata && <h2>{message}</h2>}
             {campdata && <Table data = {campdata} email={email}/>}
           </TabPanel>
           <span class="badge">{clicked}</span>
