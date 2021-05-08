@@ -153,7 +153,7 @@ export default function Form(props) {
 }
 
 function checkDate(reservedDate){
-    var d1 = new Date().toJSON().split('T')[0];
-    var d2 = new Date(reservedDate).toJSON().split('T')[0];
-    return (d1 > d2)? true: false;
+    var today = new Date().toJSON().split('T')[0];
+    var input = new Date(reservedDate).toJSON().split('T')[0];
+    return (today < input)? true: false;
 }
