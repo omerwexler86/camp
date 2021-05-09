@@ -87,12 +87,12 @@ function App(props) {
         setEmail(data.idToken.payload.email);
         API.get('campv2api', '/camp/'+ data.idToken.payload.email)
           .then(async(campRes) => {
-            if(campRes.size == undefined || campRes.size == 0){
-              setMessage("Empty! Please submit a form first");
-              console.log("Empty! Please submit a form first")
-            }else{
+            // if(campRes.size == undefined || campRes.size == 0){
+            //   setMessage("Empty! Please submit a form first");
+            //   console.log("Empty! Please submit a form first")
+            // }
               setCampdata(campRes);
-            }
+            
           })
           .catch(error => {
             console.log(error);
