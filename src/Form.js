@@ -155,5 +155,5 @@ export default function Form(props) {
 function checkDate(reservedDate){
     var today = new Date().toJSON().split('T')[0];
     var input = new Date(reservedDate).toJSON().split('T')[0];
-    return (today < input)? true: false;
+    return (today <= input)? true: false;
 }
