@@ -7,9 +7,11 @@ Please [click here](https://dev.d25ltoj978yjcn.amplifyapp.com/) to check it out
 
 ## Demo
 
-![DEMO HERE]()
+![real-timeGIF](https://user-images.githubusercontent.com/33018110/117557047-05f22a80-b024-11eb-96e7-0c6046c0d64f.gif)
 
 ## Architecture
+
+![Realtime-Campsite-Availability-Checker](https://user-images.githubusercontent.com/33018110/117557068-2621e980-b024-11eb-9b62-b327b7792a0c.png)
 
 ## Documentation
 
